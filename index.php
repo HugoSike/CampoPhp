@@ -2,7 +2,8 @@
   //Es utilizado para verificar que hay una sesion activa, en caso de no haberla, es imposible entrar
   session_start();
   if(!isset($_SESSION['username'])){ //!Diferente, Si Session es diferente a vacio, es verdadero
-    header('location: login.php');
+    //header('location: /campo/login.php'); #Trabajar en local
+    header('location: /login.php'); # Proyecto en Dominio
   }
 ?>
 <!DOCTYPE html>
@@ -12,11 +13,10 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <!-- Bootstrap CSS -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
       <title>Moctezuma Medjool Gardens S de R.L de C.V</title>
 
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
       <!-- Nuestro css-->
       <link rel="stylesheet" type="text/css" href="static/css/index.css?4">
 
@@ -66,14 +66,7 @@
           <div class="row">
             <div class= "col-md-4">
               <label for="operador" class="form-label h4">Operador:</label>
-              <select id="operador" class="form-select" name="operador">
-                <option selected></option>
-                <option value="OP1">Leonel Molina</option>
-                <option value="OP2">Francisco</option>
-                <option value="OP3">Alejandro Navarro</option>
-                <option value="OP4">Operador 4</option>
-                <option value="OP5">Operador 5</option>
-              </select>
+              <input type="text" name="operador" class="form-control" id="" value="<?php echo $_SESSION['username'] ?>" readonly>
             </div>
             <div class="col-md-4">
               <label for="maquinaria" class="form-label h4">Maq. de Elevacion:</label>
@@ -162,9 +155,10 @@
               <label for="Cantidad" class="form-label h4">Cantidad:</label>
               <input type="text" id="Cantidad" class="form-control" name="cantidad" placeholder="Lts">
             </div>
-            <div class="col-md-2 mt-4">
-              <input type="checkbox" id="horometro" class="form-check-input" name="horometro">
+            <div id="horometroDiv" class="col-md-2 mt-4">
+              <input type="checkbox" id="horometro" class="form-check-input" name="horometro" onchange="javascript:showContent()">
               <label for="horometro" class="form-label h4"> Horometro</label>
+              <input type="text" id = "content" class="form-control" style="display: none;" name="horometroMarca" placeholder="Marca">
             </div>
             <div class="col-md-2">
               <label for="horas" class="form-label h4">Horas:</label>
@@ -218,10 +212,10 @@
               <input type="text" id="Observaciones" class="form-control" name="observaciones" placeholder="Ninguno">            
             </div>
             <div class="col-md-6">
-              <label for="hora" class="form-label h4">
-                <script>
+              <label for="hora" class="form-label h4" name="fecha">
+              <script>
                   DameLaFechaHora();
-                </script>
+              </script>
               </label>
             </div>
           </div>
@@ -261,8 +255,8 @@
       </div>
         
       <!-- Scripts -->
+      <script src="static/js/show.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    
     </body>
 
 </html>

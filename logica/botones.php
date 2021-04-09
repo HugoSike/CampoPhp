@@ -1,22 +1,30 @@
 <?php
 include('db.php');
+
+
 if (isset($_POST['enviar'])){
-    $operador = $_POST['operador'];
+    $operador = $_SESSION['username']; //Envia el usuario que esta conectado haciendo el registro
     $maquinaria = $_POST['maquinaria'];
     $tractores = $_POST['tractores'];
     $chofer = $_POST['chofer'];
     $motobomba = $_POST['motobomba'];
     $cantidad = trim($_POST['cantidad']);
-    if(isset($_POST['horometro'])){ //Si horometro es seleccionado es Si, si no es seleccionado, es no
-        $horometro = "Si";
+    if(isset($_POST['horometro'])){ //Si horometro es seleccionado se toma el valor del input, si no es seleccionado, es no
+        $horometro = $_POST['horometroMarca'];
     }else{
         $horometro = "No";
     }
     $horas = $_POST['horas'];
     $predios = $_POST['predios'];
     $observaciones = trim($_POST['observaciones']);
+    //Fecha
+    date_default_timezone_set("America/Phoenix");
+    $fechaMostrar = date("G") . ":" . date("i") . "(" . date("d") . "/" . date("m") . "/" .date('y') . ")";
+    $fecha = $fechaMostrar;
 
-    $consulta = "INSERT INTO tbcampo(operador, maquinaria, tractores, chofer, motobomba, cantidad, horometro, horas, predios, observaciones) VALUES ('$operador','$maquinaria','$tractores','$chofer','$motobomba','$cantidad','$horometro','$horas','$predios','$observaciones')";
+
+
+    $consulta = "INSERT INTO tbcampo(operador, maquinaria, tractores, chofer, motobomba, cantidad, horometro, horas, predios, observaciones, fecha) VALUES ('$operador','$maquinaria','$tractores','$chofer','$motobomba','$cantidad','$horometro','$horas','$predios','$observaciones','$fecha')";
     $resultado = $conexion->query($consulta);
 
     if($resultado){
@@ -54,22 +62,26 @@ if (isset($_POST['eliminar'])){
 if (isset($_POST['actualizar'])){
     $id = $_POST['actualizarId'];
     
-    $operador = $_POST['operador'];
+    $operador = $_SESSION['username']; //Envia el usuario que esta conectado haciendo la actualización
     $maquinaria = $_POST['maquinaria'];
     $tractores = $_POST['tractores'];
     $chofer = $_POST['chofer'];
     $motobomba = $_POST['motobomba'];
     $cantidad = trim($_POST['cantidad']);
-    if(isset($_POST['horometro'])){ //Si horometro es seleccionado es Si, si no es seleccionado, es no
-        $horometro = "Si";
+    if(isset($_POST['horometro'])){ //Si horometro es seleccionado se toma el valor del input, si no es seleccionado, es no
+        $horometro = $_POST['horometroMarca'];
     }else{
         $horometro = "No";
     }
     $horas = $_POST['horas'];
     $predios = $_POST['predios'];
     $observaciones = trim($_POST['observaciones']);
+    //Fecha actualizada
+    date_default_timezone_set("America/Phoenix");
+    $fechaMostrar = date("G") . ":" . date("i") . "(" . date("d") . "/" . date("m") . "/" .date('y') . ")";
+    $fecha = $fechaMostrar;
 
-    $consulta = "UPDATE tbcampo SET operador = '$operador', maquinaria = '$maquinaria', tractores = '$tractores', chofer = '$chofer', motobomba = '$motobomba', cantidad = '$cantidad', horometro = '$horometro', horas = '$horas', predios = '$predios', observaciones = '$observaciones' WHERE tbcampo.id = '$id'";
+    $consulta = "UPDATE tbcampo SET operador = '$operador', maquinaria = '$maquinaria', tractores = '$tractores', chofer = '$chofer', motobomba = '$motobomba', cantidad = '$cantidad', horometro = '$horometro', horas = '$horas', predios = '$predios', observaciones = '$observaciones', fecha = '$fecha' WHERE tbcampo.id = '$id'";
     $resultado = $conexion->query($consulta);
 
     if($resultado){

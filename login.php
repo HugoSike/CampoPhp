@@ -2,7 +2,8 @@
     session_start();
 
     if(isset($_SESSION['username'])){ //Si Session esta vacia, es verdadero
-      header('location: index.php');
+        //header('location: /campo/index.php'); #Trabajar en local
+        header('location: /index.php'); # Proyecto en Dominio
     }
 ?>
 

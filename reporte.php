@@ -2,7 +2,8 @@
   //Es utilizado para verificar que hay una sesion activa, en caso de no haberla, es imposible entrar
   session_start();
   if(!isset($_SESSION['username'])){ //!Diferente, Si Session es diferente a vacio, es verdadero
-    header('location: login.php');
+    //header('location: /campo/login.php'); #Trabajar en local
+    header('location: /login.php'); # Proyecto en Dominio
   }
 ?>
 
@@ -53,6 +54,7 @@
             <th scope="col">Horas</th>
             <th scope="col">Predios</th>
             <th scope="col">Observaciones</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Acción</th>
           </tr>
         </thead>
@@ -75,6 +77,7 @@
               <td><?php echo $mostrar['horas']?></td>
               <td><?php echo $mostrar['predios']?></td>
               <td><?php echo $mostrar['observaciones']?></td>
+              <td><?php echo $mostrar['fecha']?></td>
               <td>
                 <form method="POST" action="editform.php">
                   <input type="hidden" name="editar" value="<?php echo $mostrar['id']; ?>">
