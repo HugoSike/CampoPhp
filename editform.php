@@ -24,7 +24,8 @@
             }
         }
         else{
-            header('location:/campo/reporte.php');
+            //header('location:/campo/reporte.php'); #Trabajar en local
+            header('location:/reporte.php'); # Proyecto en Dominio
         }
     }
 ?>
